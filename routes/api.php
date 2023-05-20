@@ -1,7 +1,9 @@
 <?php
-
 use App\Http\Controllers\FarmController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DroneController;
+use App\Http\Controllers\MapController;
+use App\Http\Controllers\PlanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +22,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 // PI user
 Route::resource('/users', UserController::class);
 //API Farm
 Route::resource('/farms', FarmController::class);
+Route::resource('/drones', DroneController::class);
+Route::resource('/plans', PlanController::class);
+Route::resource('/maps', MapController::class);
+

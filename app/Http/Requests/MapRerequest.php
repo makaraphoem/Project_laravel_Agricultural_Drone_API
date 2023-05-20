@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UserRequest extends FormRequest
+class MapRerequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,8 +14,12 @@ class UserRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
-    }
 
+    }
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json(['success' => false, 'message' => $validator->errors()], 412));
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -23,18 +28,9 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
-                'required',
-                'min:5',
-                'max:10',
-                Rule::unique('users')->ignore($this->id),
-            ],
-            'email' => [
-                'required',
-                Rule::unique('users')->ignore($this->id),
-            ],
-            'password' => 'required',
-
+            'latitude'=>'required',
+            'longitude'=>'required',
+            'image'=>'required',
         ];
     }
 }
