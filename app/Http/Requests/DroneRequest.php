@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class PlanRequest extends FormRequest
+class DroneRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,10 +27,10 @@ class PlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'spaying'=>'required',
-            'seeding'=>'required',
-            'start_date'=>'required',
-            'end_date'=>'required',
+            'name'=>'required',
+            'sensor'=>'required',
+            'playoad_capacity'=>'required',
+            'batter_life'=>'required',
         ];
     }
 }
