@@ -15,6 +15,7 @@ class PlanResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id'=>$this->id,
             'spaying'=>$this->spaying,
             'seeding'=>$this->seeding,
             'start_date'=>$this->start_date,
