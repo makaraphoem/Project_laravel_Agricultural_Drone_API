@@ -2,6 +2,7 @@
 use App\Http\Controllers\FarmController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DroneController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\PlanController;
 use Illuminate\Http\Request;
@@ -27,7 +28,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('/users', UserController::class);
 //API Farm
 Route::resource('/farms', FarmController::class);
+Route::resource('/locations', LocationController::class);
 Route::resource('/drones', DroneController::class);
 Route::resource('/plans', PlanController::class);
 Route::resource('/maps', MapController::class);
+
 
