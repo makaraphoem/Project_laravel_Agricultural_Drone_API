@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UserRequest;
+use App\Http\Resources\ShowUserResource;
+use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,15 +16,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::all();
+        return response()->json(['Get all user success'=>true, 'data'=>$user],200);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $user = User::store($request);
+        return response()->json(['Create user success'=>true, 'data'=>$user],200);
     }
 
     /**
@@ -27,7 +34,13 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::find($id);
+        if(!$user){
+
+            return response()->json(['message'=>'Not found'],404);
+        }
+        $user = new ShowUserResource($user);
+        return response()->json(['scucces'=>true, 'data'=>$user],200);
     }
 
     /**
@@ -35,7 +48,8 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       $user = User::store($request,$id);
+       return response()->json(['Update user success'=>true, 'data'=>$user],200);
     }
 
     /**
@@ -43,6 +57,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+        $user-> delete();
+        return response()->json(['Delete user success'=>true, 'data'=>$user],201);
     }
 }
