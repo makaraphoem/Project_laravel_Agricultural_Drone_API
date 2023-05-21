@@ -30,4 +30,16 @@ class Drone extends Model
     public function plans(){
         return $this->belongsToMany(Plan::class, 'plan_drones')->withTimestamps();
     }
+    public function map(){
+        return $this->belongsTo(Map::class);
+    }
+    public function location(){
+        return $this->belongsTo(Location::class);
+    }
+    public function droneType(){
+        return $this->belongsTo(DroneType::class);
+    }
+    public function famer(){
+        return $this->belongsTo(User::class);
+    }
 }

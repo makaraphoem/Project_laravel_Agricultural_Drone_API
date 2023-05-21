@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Requests\UserRequest;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,11 +18,15 @@ class ShowDroneResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'name'=>$this->name,
+            'drone_name'=>$this->drone_name,
             'sensor'=>$this->sensor,
             'playoad_capacity'=>$this->playoad_capacity,
             'batter_life'=>$this->batter_life,
-            'plan'=> PlanResource::collection($this->plans)
+            'famer'=> new UserResource($this->famer),
+            'plan'=> PlanResource::collection($this->plans),
+            'map'=> new MapResource($this->map),
+            'location'=> new LocationResource($this->location),
+            'drone_type'=> new DroneTypeResource($this->droneType)
         ];
     }
 }

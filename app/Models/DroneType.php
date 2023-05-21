@@ -17,4 +17,7 @@ class DroneType extends Model
         $droneType = self::updateOrCreate(['id'=>$id], $droneType);
         return $droneType;
     }
+    public function drones(){
+        return $this->hasMany(Drone::class);
+    }
 }

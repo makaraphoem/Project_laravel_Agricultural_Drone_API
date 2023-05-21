@@ -17,6 +17,7 @@ class ShowLocationResource extends JsonResource
         return [
             '$id'=>$this->id,
             '$name'=>$this->name,
+            'drone'=> DroneResource::collection($this->drones)
         ];
     }
 }
