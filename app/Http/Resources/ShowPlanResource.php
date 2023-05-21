@@ -20,6 +20,7 @@ class ShowPlanResource extends JsonResource
             'seeding'=>$this->seeding,
             'start_date'=>$this->start_date,
             'end_date'=>$this->end_date,
+            'area'=>$this->area,
         ];
     }
 }
