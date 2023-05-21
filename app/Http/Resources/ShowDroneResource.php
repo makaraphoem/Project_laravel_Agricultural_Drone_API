@@ -20,6 +20,7 @@ class ShowDroneResource extends JsonResource
             'sensor'=>$this->sensor,
             'playoad_capacity'=>$this->playoad_capacity,
             'batter_life'=>$this->batter_life,
+            'plan'=> PlanResource::collection($this->plans)
         ];
     }
 }

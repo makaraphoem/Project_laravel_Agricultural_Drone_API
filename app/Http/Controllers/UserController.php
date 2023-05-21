@@ -17,6 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
+        $user =  ShowUserResource::collection($user);
         return response()->json(['Get all user success'=>true, 'data'=>$user],200);
     }
 
@@ -25,7 +26,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $user = User::store($request);
+        $user = User::user($request);
         return response()->json(['Create user success'=>true, 'data'=>$user],200);
     }
 
@@ -46,9 +47,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, string $id)
     {
-       $user = User::store($request,$id);
+       $user = User::user($request,$id);
        return response()->json(['Update user success'=>true, 'data'=>$user],200);
     }
 

@@ -6,7 +6,6 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
-
 class UserRequest extends FormRequest
 {
     /**
@@ -20,7 +19,6 @@ class UserRequest extends FormRequest
     {
         throw new HttpResponseException(response()->json(['success' => false, 'message' => $validator->errors()], 412));
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -40,6 +38,7 @@ class UserRequest extends FormRequest
                 Rule::unique('users')->ignore($this->id),
             ],
             'password' => 'required',
+
         ];
     }
 }

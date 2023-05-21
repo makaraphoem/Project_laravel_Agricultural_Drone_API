@@ -15,12 +15,13 @@ class ShowPlanResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'=>$this->id,
-            'spaying'=>$this->spaying,
+            'id'=> $this->id,
+            'spaying'=> $this->spaying,
             'seeding'=>$this->seeding,
             'start_date'=>$this->start_date,
             'end_date'=>$this->end_date,
             'area'=>$this->area,
+            'drone'=>DroneResource::collection($this->drones)
         ];
     }
 }

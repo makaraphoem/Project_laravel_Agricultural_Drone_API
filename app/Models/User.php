@@ -24,9 +24,9 @@ class User extends Authenticatable
         'email',
         'password'
     ];
-
-    public static function store($request, $id=null){
-        $user = $request->only(['farm_id','name','email','password']);
+   
+    public static function user($request, $id=null){
+        $user = $request->only(['name','email','password']);
         $user['password']=Hash::make( $user['password']);
         $user = self::updateOrCreate(['id' => $id], $user);
         return $user;  
