@@ -24,7 +24,7 @@ class User extends Authenticatable
         'password',
     ];
 
-    public static function store($request, $id=null){
+    public static function user($request, $id=null){
         $user = $request->only(['name','email','password']);
         $user['password']=Hash::make( $user['password']);
         $user = self::updateOrCreate(['id' => $id], $user);

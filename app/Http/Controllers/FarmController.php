@@ -17,6 +17,7 @@ class FarmController extends Controller
     public function index()
     {
         $farm = Farm::all();
+        $farm =  ShowFarmResource::collection($farm);
         return response()->json(['Get all farm success'=>true,'data'=>$farm],200);
     }
 
@@ -26,7 +27,7 @@ class FarmController extends Controller
     public function store(FarmRequest $request)
     {
         $farm = Farm::farm($request);
-        $farm = new FarmResource($farm);
+        $farm = new ShowFarmResource($farm);
         return response()->json(['create farm success'=>true,'data'=>$farm],201);
     }
 
