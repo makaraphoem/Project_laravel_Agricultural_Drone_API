@@ -27,7 +27,7 @@ class Drone extends Model
         return $drone;
     }
 
-    public function user(): BelongsTo
+    public function farmer()
     {
         return $this->belongsTo(User::class);
     }

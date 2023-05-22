@@ -26,9 +26,9 @@ class Plan extends Model
         return $plan;
     }
 
-    public function farmer(): BelongsToMany
+    public function farmer()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
     public function drones(){
         return $this->belongsToMany(Drone::class, 'plan_drones')->withTimestamps();

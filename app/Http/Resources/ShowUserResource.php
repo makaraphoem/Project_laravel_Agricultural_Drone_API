@@ -18,7 +18,8 @@ class ShowUserResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'email'=>$this->email,
-            'drone'=>DroneResource::collection($this->drones)
+            'drone'=>DroneResource::collection($this->drones),
+            'plans'=>PlanResource::collection($this->plans),  
         ];
     }
 }
