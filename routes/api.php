@@ -6,7 +6,6 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\DroneTypeController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\PlanController;
-use App\Models\DroneType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

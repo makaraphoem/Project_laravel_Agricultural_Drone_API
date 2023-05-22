@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('sensor');
             $table->string('playoad_capacity');
             $table->string('batter_life');
-            $table->unsignedBigInteger('famer_id')->unsigned();
-            $table->foreign('famer_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('location_id')->unsigned();
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
             $table->unsignedBigInteger('map_id')->unsigned();

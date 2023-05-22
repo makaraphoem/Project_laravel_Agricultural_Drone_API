@@ -27,10 +27,11 @@ class PlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'spaying'=>'required',
+            'spraying'=>'required',
             'seeding'=>'required',
             'start_date'=>'required',
             'end_date'=>'required',
+            'area'=>'required',
         ];
     }
 }

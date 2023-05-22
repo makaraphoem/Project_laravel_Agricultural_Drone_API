@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
@@ -21,20 +22,15 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'password'
     ];
-
+   
     public static function user($request, $id=null){
         $user = $request->only(['name','email','password']);
         $user['password']=Hash::make( $user['password']);
         $user = self::updateOrCreate(['id' => $id], $user);
         return $user;  
     }
-    
-    public function drones(){
-        return $this->hasMany(Drone::class);
-    }
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -54,5 +50,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    
+    public function drones(){
+        return $this->hasMany(Drone::class);
+    }
+    public function plans()
+        {
+            return $this->hasMany(Plan::class);
+        } 
+    public function farms(): HasMany
+    {
+        return $this->hasMany(Farm::class);
+    }
 
 }
