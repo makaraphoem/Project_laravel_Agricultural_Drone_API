@@ -19,6 +19,7 @@ class ShowMapResource extends JsonResource
             'latitude'=>$this->latitude,
             'longitude'=>$this->longitude,
             'image'=>$this->image,
+            'drone'=> DroneResource::collection($this->drones)
         ];
     }
 }

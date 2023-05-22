@@ -18,4 +18,8 @@ class Map extends Model
         $map = self::updateOrCreate(['id'=>$id], $map);
         return $map;
     }
+    
+    public function drones(){
+        return $this->hasMany(Drone::class);
+    }
 }

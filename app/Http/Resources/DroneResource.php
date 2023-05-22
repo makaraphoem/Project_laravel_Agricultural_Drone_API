@@ -16,7 +16,7 @@ class DroneResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'name'=>$this->name,
+            'drone_name'=>$this->drone_name,
             'sensor'=>$this->sensor,
             'playoad_capacity'=>$this->playoad_capacity,
             'batter_life'=>$this->batter_life,

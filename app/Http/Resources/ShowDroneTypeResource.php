@@ -18,6 +18,7 @@ class ShowDroneTypeResource extends JsonResource
             'id'=>$this->id,
             'drone_type'=>$this->drone_type,
             'description'=>$this->description,
+            'drone'=> new DroneResource($this->drone)
         ];
     }
 }

@@ -14,7 +14,7 @@ class Drone extends Model
         'sensor',
         'playoad_capacity',
         'batter_life',
-        'famer_id',
+        'user_id',
         'location_id',
         'map_id',
         'drone_type_id'
@@ -22,17 +22,29 @@ class Drone extends Model
 
     public static function drone($request, $id=null)
     {
-        $drone = $request->only(['drone_name', 'sensor', 'playoad_capacity', 'batter_life','famer_id', 'location_id', 'map_id', 'drone_type_id']);
+        $drone = $request->only(['drone_name', 'sensor', 'playoad_capacity', 'batter_life','user_id', 'location_id', 'map_id', 'drone_type_id']);
         $drone = self::updateOrCreate(['id'=>$id], $drone);
         return $drone;
     }
-
-    public function farmer()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
+
     public function plans(){
         return $this->belongsToMany(Plan::class, 'plan_drones')->withTimestamps();
     }
+
+    public function map(){
+        return $this->belongsTo(Map::class);
+    }
+
+    public function location(){
+        return $this->belongsTo(Location::class);
+    }
+
+    public function droneType(){
+        return $this->belongsTo(DroneType::class);
+    }
+
 }

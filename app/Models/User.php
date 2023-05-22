@@ -31,8 +31,6 @@ class User extends Authenticatable
         $user = self::updateOrCreate(['id' => $id], $user);
         return $user;  
     }
-    
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -53,14 +51,14 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function drones(): HasMany
-    {
+    
+    public function drones(){
         return $this->hasMany(Drone::class);
     }
-    public function plans(): HasMany
-    {
-        return $this->hasMany(Plan::class);
-    }
+    public function plans()
+        {
+            return $this->hasMany(Plan::class);
+        } 
     public function farms(): HasMany
     {
         return $this->hasMany(Farm::class);

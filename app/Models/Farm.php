@@ -11,18 +11,18 @@ class Farm extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'farmer_id',
+        'user_id',
         'name',
         'size',
     ];
 
     public static function farm($request, $id=null){
-        $farm = $request->only(['farmer_id','name','size']);
+        $farm = $request->only(['user_id','name','size']);
         $farm = self::updateOrCreate(['id' => $id], $farm);
         return $farm;  
     }
     
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

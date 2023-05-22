@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('farms', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('farmer_id')->unsigned();
-            $table->foreign('farmer_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
             $table->string('size');
             $table->timestamps();

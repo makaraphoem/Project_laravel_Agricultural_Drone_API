@@ -16,4 +16,7 @@ class Location extends Model
         $location = self::updateOrCreate(['id'=>$id], $location);
         return $location;
     }
+    public function drones(){
+        return $this->hasMany(Drone::class);
+    }
 }

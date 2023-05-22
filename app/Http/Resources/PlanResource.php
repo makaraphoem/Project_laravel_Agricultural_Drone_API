@@ -16,7 +16,7 @@ class PlanResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'spaying'=>$this->spaying,
+            'spraying'=>$this->spraying,
             'seeding'=>$this->seeding,
             'start_date'=>$this->start_date,
             'end_date'=>$this->end_date,
