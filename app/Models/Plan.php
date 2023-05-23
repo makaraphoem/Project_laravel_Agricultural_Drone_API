@@ -31,6 +31,6 @@ class Plan extends Model
         return $this->belongsTo(User::class);
     }
     public function drones(){
-        return $this->belongsToMany(Drone::class, 'plan_drones')->withTimestamps();
+        return $this->belongsToMany(Drone::class, 'drone_plans')->withTimestamps();
     }
 }

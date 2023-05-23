@@ -28,13 +28,13 @@ class DroneRequest extends FormRequest
     {
         return [
             'drone_name' => 'required',
+            'drone_type' => 'required',
             'sensor' => 'required',
             'playoad_capacity' => 'required',
             'batter_life' => 'required',
             'user_id'=>'required',
-            'location_id' => 'required',
-            'map_id' => 'required',
-            'drone_type_id' => 'required'
+            'indruction_id'=>'required'
+            
         ];
     }
 }

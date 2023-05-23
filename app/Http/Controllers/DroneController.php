@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DroneRequest;
 use App\Http\Resources\ShowDroneResource;
 use App\Models\Drone;
+use App\Models\Location;
 use Illuminate\Http\Request;
 
 class DroneController extends Controller

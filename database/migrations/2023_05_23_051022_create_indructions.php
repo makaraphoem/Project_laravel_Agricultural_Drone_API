@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('maps', function (Blueprint $table) {
+        Schema::create('indructions', function (Blueprint $table) {
             $table->id();
-            $table->string('latitude');
-            $table->string('longitude');
-            $table->string('image');
+            $table->string('charge_the_batteries');
+            $table->string('download_the_app');
+            $table->string('find_a_safe_location');
+            $table->string('take_off_and_fly');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('maps');
+        Schema::dropIfExists('indructions');
     }
 };

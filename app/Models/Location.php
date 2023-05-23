@@ -9,14 +9,19 @@ class Location extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name'
+        'name',
+        'latitude',
+        'longitude',
+        'drone_id',
     ];
     public static function location($request, $id=null){
-        $location = $request->only(['name']);
+        $location = $request->only(['name', 'latitude', 'longitude', 'drone_id']);
         $location = self::updateOrCreate(['id'=>$id], $location);
         return $location;
     }
-    public function drones(){
-        return $this->hasMany(Drone::class);
+ 
+    public function drone()
+    {
+        return $this->belongsTo(Drone::class);
     }
 }

@@ -15,9 +15,11 @@ class ShowLocationResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            '$id'=>$this->id,
-            '$name'=>$this->name,
-            'drone'=> DroneResource::collection($this->drones)
+            'id'=>$this->id,
+            'name'=>$this->name,
+            'latitude'=>$this->latitude,
+            'longitude'=>$this->longitude,
+            'drone'=> new DroneResource($this->drone)
         ];
     }
 }

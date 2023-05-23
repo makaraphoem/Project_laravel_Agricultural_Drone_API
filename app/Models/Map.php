@@ -9,17 +9,18 @@ class Map extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'latitude',
-        'longitude',
+        'name',
         'image',
+        'drone_id',
     ];
     public static function map($request, $id=null){
-        $map = $request->only(['latitude', 'longitude', 'image']);
+        $map = $request->only(['name', 'image', 'drone_id']);
         $map = self::updateOrCreate(['id'=>$id], $map);
         return $map;
     }
     
-    public function drones(){
-        return $this->hasMany(Drone::class);
+    public function drone()
+    {
+        return $this->belongsTo(Drone::class);
     }
 }

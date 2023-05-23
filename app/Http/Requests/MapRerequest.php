@@ -28,9 +28,9 @@ class MapRerequest extends FormRequest
     public function rules(): array
     {
         return [
-            'latitude'=>'required',
-            'longitude'=>'required',
+            'name'=>'required',
             'image'=>'required',
+            'drone_id'=>'required',
         ];
     }
 }

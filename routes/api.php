@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DroneController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\DroneTypeController;
+use App\Http\Controllers\IndructionController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\PlanController;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ Route::resource('/locations', LocationController::class);
 Route::resource('/drones', DroneController::class);
 Route::resource('/plans', PlanController::class);
 Route::resource('/maps', MapController::class);
-Route::resource('/droneTypes', DroneTypeController::class);
+Route::resource('/indructions', IndructionController::class);
 
 
 

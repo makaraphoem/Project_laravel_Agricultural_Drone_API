@@ -19,14 +19,14 @@ class ShowDroneResource extends JsonResource
         return [
             'id'=>$this->id,
             'drone_name'=>$this->drone_name,
+            'drone_type'=>$this->drone_type,
             'sensor'=>$this->sensor,
             'playoad_capacity'=>$this->playoad_capacity,
             'batter_life'=>$this->batter_life,
             'famer'=> new UserResource($this->user),
             'plan'=> PlanResource::collection($this->plans),
-            'map'=> new MapResource($this->map),
-            'location'=> new LocationResource($this->location),
-            'drone_type'=> new DroneTypeResource($this->droneType)
+            'map'=>  MapResource::collection($this->maps),
+            'location'=>  LocationResource::collection($this->locations),
         ];
     }
 }

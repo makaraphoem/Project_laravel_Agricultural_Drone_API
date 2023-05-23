@@ -11,18 +11,17 @@ class Drone extends Model
     use HasFactory;
     protected $fillable = [
         'drone_name',
+        'drone_type',
         'sensor',
         'playoad_capacity',
         'batter_life',
         'user_id',
-        'location_id',
-        'map_id',
-        'drone_type_id'
+        'indruction_id'
     ];
 
     public static function drone($request, $id=null)
     {
-        $drone = $request->only(['drone_name', 'sensor', 'playoad_capacity', 'batter_life','user_id', 'location_id', 'map_id', 'drone_type_id']);
+        $drone = $request->only(['drone_name', 'drone_type', 'sensor', 'playoad_capacity', 'batter_life','user_id', 'indruction_id']);
         $drone = self::updateOrCreate(['id'=>$id], $drone);
         return $drone;
     }
@@ -32,19 +31,14 @@ class Drone extends Model
     }
 
     public function plans(){
-        return $this->belongsToMany(Plan::class, 'plan_drones')->withTimestamps();
+        return $this->belongsToMany(Plan::class, 'drone_plans')->withTimestamps();
     }
 
-    public function map(){
-        return $this->belongsTo(Map::class);
+    public function maps(){
+        return $this->hasMany(Map::class);
     }
-
-    public function location(){
-        return $this->belongsTo(Location::class);
+    
+    public function locations(){
+        return $this->hasMany(Location::class);
     }
-
-    public function droneType(){
-        return $this->belongsTo(DroneType::class);
-    }
-
 }

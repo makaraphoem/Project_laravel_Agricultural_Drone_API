@@ -28,7 +28,10 @@ class LocationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required'
+            'name'=>'required',
+            'latitude'=>'required',
+            'longitude'=>'required',
+            'drone_id'=>'required',
         ];
     }
 }
