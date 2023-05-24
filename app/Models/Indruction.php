@@ -20,5 +20,10 @@ class Indruction extends Model
         $indructioin = self::updateOrCreate(['id' => $id], $indructioin);
         return $indructioin;  
     }
+
+    public function drone()
+    {
+        return $this->hasOne(Drone::class);
+    }
     
 }

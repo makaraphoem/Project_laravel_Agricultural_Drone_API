@@ -54,6 +54,9 @@ class LocationController extends Controller
     public function destroy(string $id)
     {
         $location = Location::find($id);
+        if(!$location){
+            return response()->json(['message'=>'Not found'],404);
+        }
         $location->delete();
         return response()->json(['message'=>true, 'data'=>$location], 200);
     }

@@ -34,6 +34,9 @@ class MapController extends Controller
     public function show(string $id)
     {
         $map = Map::find($id);
+        if(!$map){
+            return response()->json(['message'=>'Not found'],404);
+        }
         $map = new ShowMapResource($map);
         return response()->json(['message'=>true, 'data'=>$map], 200);
     }
@@ -55,6 +58,9 @@ class MapController extends Controller
     public function destroy(string $id)
     {
         $map = Map::find($id);
+        if(!$map){
+            return response()->json(['message'=>'Not found'],404);
+        }
         $map->delete();
         return response()->json(['message'=>true, 'data'=>$map], 200);
     }

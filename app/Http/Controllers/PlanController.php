@@ -34,6 +34,9 @@ class PlanController extends Controller
     public function show(string $id)
     {
         $plan = Plan::find($id);
+        if(!$plan){
+            return response()->json(['message'=>'Not found'],404);
+        }
         $plan = new ShowPlanResource($plan);
         return response()->json(['message'=>true, 'data'=>$plan], 200);
     }
@@ -54,6 +57,9 @@ class PlanController extends Controller
     public function destroy(string $id)
     {
         $plan = Plan::find($id);
+        if(!$plan){
+            return response()->json(['message'=>'Not found'],404);
+        }
         $plan->delete();
         return response()->json(['message'=>true, 'data'=>$plan], 200);
     }

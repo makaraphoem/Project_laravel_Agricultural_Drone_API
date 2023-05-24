@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DroneRequest;
+use App\Http\Resources\DroneResource;
 use App\Http\Resources\ShowDroneResource;
 use App\Models\Drone;
 use App\Models\Location;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class DroneController extends Controller
@@ -35,9 +37,13 @@ class DroneController extends Controller
     public function show(string $id)
     {
         $drone = Drone::find($id);
+        if(!$drone){
+            return response()->json(['message'=>'Not found'],404);
+        }
         $drone = new ShowDroneResource($drone);
         return response()->json(['message'=>true, 'data'=>$drone], 200);
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -55,7 +61,21 @@ class DroneController extends Controller
     public function destroy(string $id)
     {
         $drone = Drone::find($id);
+        $drone = Drone::find($id);
+        if(!$drone){
+            return response()->json(['message'=>'Not found'],404);
+        }
         $drone->delete();
+        return response()->json(['message'=>true, 'data'=>$drone], 200);
+    }
+
+    public function droneLocation(string $id, string $location_id)
+    {
+        $drone = Drone::find($id)->with(['locations' => function($query) use ($location_id){
+                $query->orderByDesc('created_at')->where('id', $location_id); }])->get();
+        if(!$drone){
+            return response()->json(['message'=>'Not found'],404);
+        }
         return response()->json(['message'=>true, 'data'=>$drone], 200);
     }
 }

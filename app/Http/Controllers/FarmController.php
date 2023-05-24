@@ -58,6 +58,9 @@ class FarmController extends Controller
     public function destroy(string $id)
     {
         $farm = Farm::find($id);
+        if(!$farm){
+            return response()->json(['message'=>'Not found'],404);
+        }
         $farm-> delete();
         return response()->json(['Delete fa$farm success'=>true, 'data'=>$farm],201);
     }

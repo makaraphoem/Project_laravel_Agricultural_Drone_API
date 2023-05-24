@@ -24,9 +24,9 @@ class ShowDroneResource extends JsonResource
             'playoad_capacity'=>$this->playoad_capacity,
             'batter_life'=>$this->batter_life,
             'famer'=> new UserResource($this->user),
-            'plan'=> PlanResource::collection($this->plans),
-            'map'=>  MapResource::collection($this->maps),
-            'location'=>  LocationResource::collection($this->locations),
+            'plans'=> PlanResource::collection($this->plans),
+            'maps'=> PlanResource::collection($this->maps),
+            'locations'=>  LocationResource::collection($this->locations),
         ];
     }
 }

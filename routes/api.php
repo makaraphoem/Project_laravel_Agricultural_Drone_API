@@ -33,5 +33,7 @@ Route::resource('/plans', PlanController::class);
 Route::resource('/maps', MapController::class);
 Route::resource('/indructions', IndructionController::class);
 
+Route::get('/drone/{id}/{location_id}',[DroneController::class, 'droneLocation']);
+
 
 

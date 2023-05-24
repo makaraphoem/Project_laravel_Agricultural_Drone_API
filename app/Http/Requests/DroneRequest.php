@@ -34,7 +34,6 @@ class DroneRequest extends FormRequest
             'batter_life' => 'required',
             'user_id'=>'required',
             'indruction_id'=>'required'
-            
         ];
     }
 }
