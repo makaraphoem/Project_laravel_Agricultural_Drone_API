@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('/users', UserController::class);
 Route::resource('/farms', FarmController::class);
-Route::resource('/locations', LocationController::class);
+Route::resource('/locations',LocationController::class);
 Route::resource('/drones', DroneController::class);
 Route::resource('/plans', PlanController::class);
 Route::resource('/maps', MapController::class);
