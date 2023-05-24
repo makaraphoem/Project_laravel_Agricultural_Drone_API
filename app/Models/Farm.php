@@ -26,6 +26,11 @@ class Farm extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function maps()
+    {
+        return $this->hasMany(Map::class);
+    }
 }
 
 

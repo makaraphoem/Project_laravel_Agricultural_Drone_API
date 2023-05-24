@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Map extends Model
 {
@@ -12,9 +13,10 @@ class Map extends Model
         'name',
         'image',
         'drone_id',
+        'farm_id',
     ];
     public static function map($request, $id=null){
-        $map = $request->only(['name', 'image', 'drone_id']);
+        $map = $request->only(['name', 'image', 'drone_id', 'farm_id']);
         $map = self::updateOrCreate(['id'=>$id], $map);
         return $map;
     }
@@ -22,5 +24,10 @@ class Map extends Model
     public function drone()
     {
         return $this->belongsTo(Drone::class);
+    }
+
+    public function farm()
+    {
+        return $this->belongsTo(Farm::class);
     }
 }

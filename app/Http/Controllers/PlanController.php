@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PlanRequest;
 use App\Http\Resources\ShowPlanResource;
 use App\Models\Plan;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PlanController extends Controller
 {
@@ -22,10 +25,11 @@ class PlanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(PlanRequest $request)
     {
         $plan = Plan::plan($request);
-        return response()->json(['message'=>true, 'data'=>$plan], 201);
+        return response()->json(['message'=>"create a plan successfull", 'data'=>$plan], 201);
     }
 
     /**

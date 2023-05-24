@@ -61,7 +61,6 @@ class DroneController extends Controller
     public function destroy(string $id)
     {
         $drone = Drone::find($id);
-        $drone = Drone::find($id);
         if(!$drone){
             return response()->json(['message'=>'Not found'],404);
         }
@@ -69,13 +68,19 @@ class DroneController extends Controller
         return response()->json(['message'=>true, 'data'=>$drone], 200);
     }
 
-    public function droneLocation(string $id, string $location_id)
+    public function droneLocation(string $id, string $locationId)
     {
-        $drone = Drone::find($id)->with(['locations' => function($query) use ($location_id){
-                $query->orderByDesc('created_at')->where('id', $location_id); }])->get();
+        $drone = Drone::find($id)->with(['locations' => function($query) use ($locationId){
+                $query->orderByDesc('created_at')->where('id', $locationId); }])->first();
         if(!$drone){
             return response()->json(['message'=>'Not found'],404);
         }
-        return response()->json(['message'=>true, 'data'=>$drone], 200);
+        $locations = $drone->locations->map(function($location) {
+            return [
+                'latitude' => $location->latitude,
+                'longitude' => $location->longitude,
+            ];
+        });
+        return response()->json(['message'=>"Show current latitude and longitude successfully", 'data'=>$locations], 200);
     }
 }

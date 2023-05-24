@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class MapRerequest extends FormRequest
 {
@@ -31,6 +32,10 @@ class MapRerequest extends FormRequest
             'name'=>'required',
             'image'=>'required',
             'drone_id'=>'required',
+            'farm_id' => [
+                'required',
+                // Rule::unique('farms')->ignore($this->id),
+            ],
         ];
     }
 }
