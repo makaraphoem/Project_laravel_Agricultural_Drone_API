@@ -68,7 +68,9 @@ class MapController extends Controller
         $map->delete();
         return response()->json(['message'=>true, 'data'=>$map], 200);
     }
-
+       /**
+     * Find name map and farm id for download image
+     */
     public function downloadMapPhoto(string $mapName, string $farmId )
     {
         $map = Map::where('name', $mapName)->with(['farm' => function($query) use ($farmId){
@@ -78,7 +80,9 @@ class MapController extends Controller
         }
         return response()->json(['message'=>'Image download successfully', 'data'=>$map->image], 200);
     }
-
+      /**
+     * Find name map and farm id for delete image.
+     */
     public function deleteMapPhoto(string $mapName, string $farmId )
     {
         $map = Map::where('name', $mapName)->with(['farm' => function($query) use ($farmId){
@@ -86,29 +90,32 @@ class MapController extends Controller
         if(!$map){
             return response()->json(['message'=>'Not found'],404);
         }
-
-        if ($map->image != null) {
-            Storage::delete($map->image);
-            $map->image != null;
-            $map->delete();
+        if (!$map->image) {
+            return response()->json(['message' => 'Map image not found'], 404);
         }
-
-        return response()->json(['message'=>'Image delete successfully', 'data'=>$map->image], 200);
+        $map->image = "null";
+        $map->save();
+        return response()->json(['message'=>'Image deleted successfully'], 200);
     }
-
-    // public function addMapPhoto(string $mapName, string $farmId, Request $request)
-    // {
-    //     $farm = Farm::where('name', $mapName)->where('id', $farmId)->first();
-
-    //     if (!$farm) {
-    //         return response()->json(['message' => 'Farm not found'], 404);
-    //     }
-    //     $map = new Map();
-    //     $map->id = $farmId;
-    //     $map->image_path = $request->file('image')->store('maps');
-    //     $map->farm_id = $farm->id;
-    //     $map->save();
-
-    //     return response()->json(['message'=>'Map added successfully', 'data'=>$map], 200);
-    // }
+     /**
+     * Find name map and farm id for add new image.
+     */
+    public function addMapPhoto(string $mapName, string $farmId, Request $request)
+    {
+        $map = Map::where('name', $mapName)->with(['farm' => function($query) use ($farmId){
+            $query->orderByDesc('created_at')->where('id', $farmId); }])->first();
+        if (!$map) {
+            return response()->json(['message' => 'Map not found'], 404);
+        }
+        // $droneId = $map->drone_id;
+        // $map = new Map([
+        //     'name' => $mapName,
+        //     'image' => $request->input('image'),
+        //     'drone_id' =>  $droneId,
+        //     'farm_id' => $farmId,
+        // ]);
+        $map->image = $request->input('image');
+        $map->save();
+        return response()->json(['message'=>'Map added successfully', 'data'=>$map], 200);
+    }
 }

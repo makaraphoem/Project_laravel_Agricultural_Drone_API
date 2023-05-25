@@ -67,4 +67,25 @@ class PlanController extends Controller
         $plan->delete();
         return response()->json(['message'=>true, 'data'=>$plan], 200);
     }
+
+    public function getIntroduction(string $planName, string $droneId)
+    {
+        $plans = Plan::where('name', $planName)->with(['drones' => function($query) use ($droneId){
+            $query->orderByDesc('created_at')->where('id', $droneId);
+        }, 'drones.introductions'])->get();
+
+        // $introductionIds = [];
+        $drone = $plans->drones->indruction_id->first();
+        $droneId = $drone->indruction_id;
+
+        foreach ($plans as $plan) {
+            foreach ($plan->drones as $drone) {
+                foreach ($drone->introductions as $introduction) {
+                    $introductionIds[] = $introduction->introduction_id;
+                }
+            }
+            return $introductionIds;
+        }
+    }
+
 }

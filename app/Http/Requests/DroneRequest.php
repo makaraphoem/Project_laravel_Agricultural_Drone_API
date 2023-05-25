@@ -28,6 +28,7 @@ class DroneRequest extends FormRequest
     {
         return [
             'drone_name' => 'required',
+            'drone_id' => 'required',
             'drone_type' => 'required',
             'sensor' => 'required',
             'playoad_capacity' => 'required',

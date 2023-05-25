@@ -44,7 +44,7 @@ Route::resource('/indructions', IndructionController::class);
 Route::get('/drone/{id}/{locationId}',[DroneController::class, 'droneLocation']);
 Route::get('/map/{mapName}/{farmId}',[MapController::class, 'downloadMapPhoto']);
 Route::delete('/map/{mapName}/{farmId}',[MapController::class, 'deleteMapPhoto']);
-Route::post('/map/{mapName}/{farmId}',[MapController::class, 'addMapPhoto']);
+Route::put('/map/{mapName}/{farmId}',[MapController::class, 'addMapPhoto']);
 
 
 

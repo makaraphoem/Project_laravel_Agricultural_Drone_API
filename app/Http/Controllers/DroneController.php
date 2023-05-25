@@ -67,7 +67,9 @@ class DroneController extends Controller
         $drone->delete();
         return response()->json(['message'=>true, 'data'=>$drone], 200);
     }
-
+    /**
+     * Find id drone and location for get current location latitude and longitude.
+     */
     public function droneLocation(string $id, string $locationId)
     {
         $drone = Drone::find($id)->with(['locations' => function($query) use ($locationId){
