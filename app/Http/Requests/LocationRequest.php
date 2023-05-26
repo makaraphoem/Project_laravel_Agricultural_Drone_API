@@ -29,7 +29,6 @@ class LocationRequest extends FormRequest
     public function rules(): array
     {
         return [
-
             'province' => [
                 'required',
                 Rule::unique('locations')->ignore($this->id),
