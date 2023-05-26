@@ -37,7 +37,10 @@ class UserRequest extends FormRequest
                 'required',
                 Rule::unique('users')->ignore($this->id),
             ],
-            'password' => 'required',
+            'password' =>[
+                'required',
+                Rule::unique('users')->ignore($this->id),
+            ] 
 
         ];
     }

@@ -8,6 +8,7 @@ use App\Http\Resources\IndructionResource;
 use App\Http\Resources\ShowDroneResource;
 use App\Models\Drone;
 use App\Models\Indruction;
+use App\Models\Instruction;
 use App\Models\Location;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class DroneController extends Controller
     {
         $drones = Drone::all();
         $drones = ShowDroneResource::collection($drones);
-        return response()->json(['message'=>true, 'data'=>$drones], 200);
+        return response()->json(['message'=>"Get all drone successfully", 'data'=>$drones], 200);
     }
 
     /**
@@ -30,7 +31,7 @@ class DroneController extends Controller
     public function store(DroneRequest $request)
     {
         $drone = Drone::drone($request);
-        return response()->json(['message'=>true, 'data'=>$drone], 201);
+        return response()->json(['message'=>"Create drone successfully", 'data'=>$drone], 201);
     }
 
     /**
@@ -40,21 +41,22 @@ class DroneController extends Controller
     {
         $drone = Drone::where('drone_id', $drone_id)->get();
         if(!$drone){
-            return response()->json(['message'=>'Not found'],404);
+            return response()->json(['message'=>'Drone not found'],404);
         }
         $drone =  DroneResource::collection($drone);
-        return response()->json(['message'=>true, 'data'=>$drone], 200);
+        return response()->json(['message'=>"Get drone by id successfully", 'data'=>$drone], 200);
     }
     
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(DroneRequest $request, string $drone_id)
+    public function update(DroneRequest $request, string $droneId)
     {
-        $drone = Drone::where('drone_id', $drone_id)->get();
-        $drone = Drone::drone($request, $drone_id);
-        return response()->json(['message'=>true, 'data'=>$drone], 200);
+        $drone = Drone::where('drone_id', $droneId)->get();
+        // dd($drone);
+        $drone = Drone::drone($request, $droneId);
+        return response()->json(['message'=>"Update drone by id successfully", 'data'=>$drone], 200);
     }
     
     /**
@@ -64,10 +66,10 @@ class DroneController extends Controller
     {
         $drone = Drone::find($id);
         if(!$drone){
-            return response()->json(['message'=>'Not found'],404);
+            return response()->json(['message'=>'Drone not found'],404);
         }
         $drone->delete();
-        return response()->json(['message'=>true, 'data'=>$drone], 200);
+        return response()->json(['message'=>"Delete drone by id successfully", 'data'=>$drone], 200);
     }
 
     /**
@@ -78,7 +80,7 @@ class DroneController extends Controller
         $drone = Drone::where('drone_id', $droneId)->with(['locations' => function($query) use ($locationId){
                 $query->where('id', $locationId); }])->first();
         if(!$drone){
-            return response()->json(['message'=>'Not found'],404);
+            return response()->json(['message'=>'Drone not found'],404);
         }
         $locations = $drone->locations->map(function($location) {
             return [
@@ -94,12 +96,11 @@ class DroneController extends Controller
      */
     public function runDrone(string $droneId, Request $request)
     {
-        $runDrone = Indruction::whereHas('drone', function ($query) use ($droneId) {
+        $runDrone = Instruction::whereHas('drone', function ($query) use ($droneId) {
             $query->where('drone_id', $droneId);})->first();
-        $runDrone->is_active  = $request->input('is_active');
+        $runDrone->action  = $request->input('action');
         $runDrone->save();
-
-        return response()->json(['message'=>"Failed to save instruction", 'data'=>$runDrone],500);
+        return response()->json(['message'=>"Drone run successfully", 'data'=>$runDrone],500);
 
      
     }

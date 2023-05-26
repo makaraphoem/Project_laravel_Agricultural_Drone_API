@@ -16,8 +16,9 @@ class ShowFarmResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'name'=>$this->name,
+            'farm_name'=>$this->name,
             'size'=>$this->size,
+            'farming_type'=>$this->farming_type,
             'user'=> new UserResource($this->user), 
             'maps'=>$this->maps
         ];

@@ -7,6 +7,7 @@ use App\Http\Resources\IndructionResource;
 use App\Http\Resources\PlanResource;
 use App\Http\Resources\ShowPlanResource;
 use App\Models\Indruction;
+use App\Models\Instruction;
 use App\Models\Plan;
 use DOMProcessingInstruction;
 use Illuminate\Auth\AuthenticationException;
@@ -23,7 +24,7 @@ class PlanController extends Controller
     {
         $palns = Plan::all();
         $palns = ShowPlanResource::collection($palns);
-        return response()->json(['message'=>true, 'data'=>$palns], 200);
+        return response()->json(['message'=>"Get all plan successfully", 'data'=>$palns], 200);
     }
 
     /**
@@ -33,7 +34,7 @@ class PlanController extends Controller
     public function store(PlanRequest $request)
     {
         $plan = Plan::plan($request);
-        return response()->json(['message'=>"create a plan successfull", 'data'=>$plan], 201);
+        return response()->json(['message'=>"Create plan successfully", 'data'=>$plan], 201);
     }
 
     /**
@@ -43,10 +44,10 @@ class PlanController extends Controller
     {
         $plan = Plan::find($id);
         if(!$plan){
-            return response()->json(['message'=>'Not found'],404);
+            return response()->json(['message'=>'Plan not found'],404);
         }
         $plan = new ShowPlanResource($plan);
-        return response()->json(['message'=>true, 'data'=>$plan], 200);
+        return response()->json(['message'=>"Get plan by id successfully", 'data'=>$plan], 200);
     }
 
     /**
@@ -56,7 +57,7 @@ class PlanController extends Controller
     {
         $plan = Plan::find($id);
         $plan = Plan::plan($request, $id);
-        return response()->json(['message'=>true, 'data'=>$plan], 200);
+        return response()->json(['message'=>"Update plan successfully", 'data'=>$plan], 200);
     }
 
     /**
@@ -69,15 +70,15 @@ class PlanController extends Controller
             return response()->json(['message'=>'Not found'],404);
         }
         $plan->delete();
-        return response()->json(['message'=>true, 'data'=>$plan], 200);
+        return response()->json(['message'=>"Delete plan successfully", 'data'=>$plan], 200);
     }
      /**
      * Find  plan name and indruction id for show plan indructiion.
      */
     public function getIntroduction(string $planName)
     {
-        $planIndructions = Indruction::whereHas('plan', function ($query) use ($planName) {
-            $query->where('name', $planName);})->first();
+        $planIndructions = Instruction::whereHas('plan', function ($query) use ($planName) {
+            $query->where('plan_name', $planName);})->first();
         if(!$planIndructions){
             return response()->json(['message'=>'Plan not found'],404);
         }

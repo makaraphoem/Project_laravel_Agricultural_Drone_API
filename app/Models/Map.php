@@ -10,13 +10,13 @@ class Map extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
+        'province',
         'image',
         'drone_id',
         'farm_id',
     ];
     public static function map($request, $id=null){
-        $map = $request->only(['name', 'image', 'drone_id', 'farm_id']);
+        $map = $request->only(['province', 'image', 'drone_id', 'farm_id']);
         $map = self::updateOrCreate(['id'=>$id], $map);
         return $map;
     }

@@ -16,11 +16,11 @@ class IndructionResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'charge_the_batteries'=>$this->charge_the_batteries,
+            'charge_the_batterie'=>$this->charge_the_batterie,
             'download_the_app'=>$this->download_the_app,
             'find_a_safe_location'=>$this->find_a_safe_location,
             'take_off_and_fly'=>$this->take_off_and_fly,
-            'is_actiove'=>(bool) $this->is_active,
+            'action'=>(bool) $this->action,
         ];
     }
 }

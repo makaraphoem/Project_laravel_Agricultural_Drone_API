@@ -45,7 +45,7 @@ class LocationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $location = Location::location($request,$id);
+        $location = Location::location($request, $id);
         return response()->json(['Update location success'=>true, 'data'=>$location],200);
     }
     /**

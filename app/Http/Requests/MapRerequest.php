@@ -29,7 +29,7 @@ class MapRerequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
+            'province'=>'required',
             'image'=>'required',
             'drone_id'=>'required',
             'farm_id' => [

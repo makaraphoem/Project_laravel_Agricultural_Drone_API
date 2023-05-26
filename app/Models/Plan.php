@@ -11,7 +11,7 @@ class Plan extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
+        'plan_name',
         'spraying',
         'seeding',
         'start_date',
@@ -20,7 +20,7 @@ class Plan extends Model
         'user_id',
     ];
     public static function plan($request, $id=null){
-        $plan = $request->only(['name','spraying', 'seeding', 'start_date', 'end_date','area','user_id']);
+        $plan = $request->only(['plan_name','spraying', 'seeding', 'start_date', 'end_date','area','user_id']);
         $plan = self::updateOrCreate(['id'=>$id], $plan);
         $drones = request('drones');
         $plan->drones()->sync($drones);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\IndructionRequest;
 use App\Http\Resources\ShowIndructionResource;
 use App\Models\Indruction;
+use App\Models\Instruction;
 use Illuminate\Http\Request;
 
 class IndructionController extends Controller
@@ -14,7 +15,7 @@ class IndructionController extends Controller
      */
     public function index()
     {
-        $indructions = Indruction::all();
+        $indructions = Instruction::all();
         $indructions = ShowIndructionResource::collection($indructions);
         return response()->json(['message'=>true, 'data'=>$indructions], 200);
     }
@@ -24,7 +25,7 @@ class IndructionController extends Controller
      */
     public function store(IndructionRequest $request)
     {
-        $indruction = Indruction::indruction($request);
+        $indruction = Instruction::indruction($request);
         return response()->json(['message'=>true, 'data'=>$indruction], 201);
     }
 
@@ -33,7 +34,7 @@ class IndructionController extends Controller
      */
     public function show(string $id)
     {
-        $indruction = Indruction::find($id);
+        $indruction = Instruction::find($id);
         if(!$indruction){
             return response()->json(['message'=>'Not found'],404);
         }
@@ -46,7 +47,7 @@ class IndructionController extends Controller
      */
     public function update(IndructionRequest $request, string $id)
     {
-        $indruction = Indruction::indruction($request,$id);
+        $indruction = Instruction::indruction($request,$id);
         return response()->json(['Update indruction success'=>true, 'data'=>$indruction],200);
     }
 
@@ -55,7 +56,7 @@ class IndructionController extends Controller
      */
     public function destroy(string $id)
     {
-        $indruction = Indruction::find($id);
+        $indruction = Instruction::find($id);
         if(!$indruction){
             return response()->json(['message'=>'Not found'],404);
         }
