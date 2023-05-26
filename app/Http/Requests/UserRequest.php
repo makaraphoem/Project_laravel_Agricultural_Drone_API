@@ -45,6 +45,13 @@ class UserRequest extends FormRequest
                 'max:20',
                 Rule::unique('users')->ignore($this->id),
             ],
+<<<<<<< HEAD
+=======
+            'password' =>[
+                'required',
+                Rule::unique('users')->ignore($this->id),
+            ] 
+>>>>>>> d18784f38fb64a5bdb7d91abad45093ad23496ec
 
         ];
     }

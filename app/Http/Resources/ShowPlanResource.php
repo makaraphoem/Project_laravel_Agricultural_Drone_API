@@ -16,12 +16,13 @@ class ShowPlanResource extends JsonResource
     {
         return [
             'id'=> $this->id,
-            'name'=> $this->name,
+            'plan_name'=> $this->plan_name,
             'spraying'=> $this->spraying,
             'seeding'=>$this->seeding,
             'start_date'=>$this->start_date,
             'end_date'=>$this->end_date,
             'area'=>$this->area,
+            'indructions'=>IndructionResource::collection($this->indructions),
             'drone'=>DroneResource::collection($this->drones),
             'farmer'=> new UserResource($this->user), 
         ];

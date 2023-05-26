@@ -34,6 +34,8 @@ class FarmRequest extends FormRequest
                 Rule::unique('farms')->ignore($this->id),
             ],
             'size' => 'required',
+            'farming_type' => 'required',
+            'user_id' => 'required'
         ];
     }
 }

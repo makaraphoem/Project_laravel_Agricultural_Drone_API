@@ -17,13 +17,12 @@ class Drone extends Model
         'playoad_capacity',
         'batter_life',
         'user_id',
-        'indruction_id'
     ];
 
-    public static function drone($request, $drone_id=null)
+    public static function drone($request, $droneId=null)
     {
-        $drone = $request->only(['drone_id', 'drone_name', 'drone_type', 'sensor', 'playoad_capacity', 'batter_life','user_id', 'indruction_id']);
-        $drone = self::updateOrCreate(['drone_id'=>$drone_id], $drone);
+        $drone = $request->only(['drone_id', 'drone_name', 'drone_type', 'sensor', 'playoad_capacity', 'batter_life','user_id']);
+        $drone = self::updateOrCreate(['drone_id'=>$droneId], $drone);
         return $drone;
     }
     public function user()
@@ -43,7 +42,7 @@ class Drone extends Model
         return $this->hasMany(Location::class);
     }
 
-    public function indruction(){
-        return $this->belongsTo(Indruction::class);
+    public function indructions(){
+        return $this->hasMany(Indruction::class);
     }
 }

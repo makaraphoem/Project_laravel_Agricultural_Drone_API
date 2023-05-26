@@ -28,7 +28,7 @@ class FarmController extends Controller
     {
         $farm = Farm::farm($request);
         $farm = new ShowFarmResource($farm);
-        return response()->json(['create farm success'=>true,'data'=>$farm],201);
+        return response()->json(['message'=>"Create farm success",'data'=>$farm],201);
     }
 
     /**

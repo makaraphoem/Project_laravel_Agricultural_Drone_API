@@ -11,13 +11,14 @@ class Farm extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id',
         'name',
         'size',
+        'farming_type',
+        'user_id',
     ];
 
     public static function farm($request, $id=null){
-        $farm = $request->only(['user_id','name','size']);
+        $farm = $request->only(['name','size', 'farming_type', 'user_id']);
         $farm = self::updateOrCreate(['id' => $id], $farm);
         return $farm;  
     }

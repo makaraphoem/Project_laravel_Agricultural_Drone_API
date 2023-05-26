@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('batter_life');
             $table->unsignedBigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('indruction_id')->unsigned();
-            $table->foreign('indruction_id')->references('id')->on('indructions')->onDelete('cascade');
             $table->timestamps();
         });
     }

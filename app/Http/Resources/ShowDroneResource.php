@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Http\Requests\UserRequest;
+use App\Models\Indruction;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -25,8 +26,9 @@ class ShowDroneResource extends JsonResource
             'playoad_capacity'=>$this->playoad_capacity,
             'batter_life'=>$this->batter_life,
             'famer'=> new UserResource($this->user),
+            'indructions'=>IndructionResource::collection($this->indructions),
             'plans'=> PlanResource::collection($this->plans),
-            'maps'=> PlanResource::collection($this->maps),
+            'maps'=> MapResource::collection($this->maps),
             'locations'=>  LocationResource::collection($this->locations),
         ];
     }

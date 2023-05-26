@@ -11,12 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('indructions', function (Blueprint $table) {
+        Schema::create('instructions', function (Blueprint $table) {
             $table->id();
-            $table->string('charge_the_batteries');
+            $table->string('charge_the_batterie');
             $table->string('download_the_app');
             $table->string('find_a_safe_location');
             $table->string('take_off_and_fly');
+            $table->boolean('action')->default(false);
+            $table->unsignedBigInteger('drone_id')->unsigned();
+            $table->foreign('drone_id')->references('id')->on('drones')->onDelete('cascade');
+            $table->unsignedBigInteger('plan_id')->unsigned();
+            $table->foreign('plan_id')->references('id')->on('plans')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('indructions');
+        Schema::dropIfExists('instructions');
     }
 };

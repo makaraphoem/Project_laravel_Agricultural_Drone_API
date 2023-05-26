@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('province');
             $table->string('latitude');
             $table->string('longitude');
             $table->unsignedBigInteger('drone_id')->unsigned();

@@ -27,10 +27,12 @@ class IndructionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'charge_the_batteries'=>'required',
+            'charge_the_batterie'=>'required',
             'download_the_app'=>'required',
             'find_a_safe_location'=>'required',
             'take_off_and_fly'=>'required',
+            'drone_id'=>'required',
+            'plan_id'=>'required',
         ];
     }
 }

@@ -29,7 +29,7 @@ class MapController extends Controller
     public function store(MapRerequest $request)
     {
         $map = Map::map($request);
-        return response()->json(['message'=>true, 'data'=>$map], 201);
+        return response()->json(['message'=>"Create map successfully", 'data'=>$map], 201);
     }
 
     /**
@@ -39,10 +39,10 @@ class MapController extends Controller
     {
         $map = Map::find($id);
         if(!$map){
-            return response()->json(['message'=>'Not found'],404);
+            return response()->json(['message'=>'Map not found'],404);
         }
         $map = new ShowMapResource($map);
-        return response()->json(['message'=>true, 'data'=>$map], 200);
+        return response()->json(['message'=>"Get map by id successfully", 'data'=>$map], 200);
     }
     
 
@@ -53,7 +53,7 @@ class MapController extends Controller
     {
         $map = Map::find($id);
         $map = Map::map($request, $id);
-        return response()->json(['message'=>true, 'data'=>$map], 200);
+        return response()->json(['message'=>"Update map successfully", 'data'=>$map], 200);
     }
 
     /**
@@ -63,47 +63,50 @@ class MapController extends Controller
     {
         $map = Map::find($id);
         if(!$map){
-            return response()->json(['message'=>'Not found'],404);
+            return response()->json(['message'=>'Map not found'],404);
         }
         $map->delete();
-        return response()->json(['message'=>true, 'data'=>$map], 200);
+        return response()->json(['message'=>"Delete map successfully", 'data'=>$map], 200);
     }
+
        /**
      * Find name map and farm id for download image
      */
-    public function downloadMapPhoto(string $mapName, string $farmId )
+    public function downloadMapPhoto(string $province, string $farmId )
     {
-        $map = Map::where('name', $mapName)->with(['farm' => function($query) use ($farmId){
-            $query->orderByDesc('created_at')->where('id', $farmId); }])->first();
+        $map = Map::where('province', $province)->with(['farm' => function($query) use ($farmId){
+            $query->where('id', $farmId); }])->first();
         if(!$map){
             return response()->json(['message'=>'Not found'],404);
         }
         return response()->json(['message'=>'Image download successfully', 'data'=>$map->image], 200);
     }
+
       /**
      * Find name map and farm id for delete image.
      */
-    public function deleteMapPhoto(string $mapName, string $farmId )
+    public function deleteMapPhoto(string $province, string $farmId )
     {
-        $map = Map::where('name', $mapName)->with(['farm' => function($query) use ($farmId){
-            $query->orderByDesc('created_at')->where('id', $farmId); }])->first();
+        $map = Map::where('province', $province)->with(['farm' => function($query) use ($farmId){
+            $query->where('id', $farmId); }])->first();
         if(!$map){
-            return response()->json(['message'=>'Not found'],404);
+            return response()->json(['message'=>'Map not found'],404);
         }
         if (!$map->image) {
             return response()->json(['message' => 'Map image not found'], 404);
         }
         $map->image = "null";
         $map->save();
-        return response()->json(['message'=>'Image deleted successfully'], 200);
+        return response()->json(['message'=>'Image deleted successfully', 'data'=>$map], 200);
     }
+    
      /**
      * Find name map and farm id for add new image.
      */
-    public function addMapPhoto(string $mapName, string $farmId, Request $request)
+    public function addMapPhoto(string $province, string $farmId, Request $request)
     {
-        $map = Map::where('name', $mapName)->with(['farm' => function($query) use ($farmId){
-            $query->orderByDesc('created_at')->where('id', $farmId); }])->first();
+        $map = Map::where('province', $province)->with(['farm' => function($query) use ($farmId){
+            $query->where('id', $farmId); }])->first();
         if (!$map) {
             return response()->json(['message' => 'Map not found'], 404);
         }

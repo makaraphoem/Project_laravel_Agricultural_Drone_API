@@ -28,7 +28,7 @@ class PlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => [
+            'plan_name' => [
                 'required',
                 Rule::unique('plans')->ignore($this->id),
             ],
@@ -37,6 +37,7 @@ class PlanRequest extends FormRequest
             'start_date'=>'required',
             'end_date'=>'required',
             'area'=>'required',
+            'user_id'=>'required',
         ];
     }
 }
