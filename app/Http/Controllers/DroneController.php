@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DroneRequest;
 use App\Http\Resources\DroneResource;
+use App\Http\Resources\IndructionResource;
 use App\Http\Resources\ShowDroneResource;
 use App\Models\Drone;
+use App\Models\Indruction;
 use App\Models\Location;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -67,13 +69,14 @@ class DroneController extends Controller
         $drone->delete();
         return response()->json(['message'=>true, 'data'=>$drone], 200);
     }
+
     /**
      * Find id drone and location for get current location latitude and longitude.
      */
-    public function droneLocation(string $id, string $locationId)
+    public function droneLocation(string $droneId, string $locationId)
     {
-        $drone = Drone::find($id)->with(['locations' => function($query) use ($locationId){
-                $query->orderByDesc('created_at')->where('id', $locationId); }])->first();
+        $drone = Drone::where('drone_id', $droneId)->with(['locations' => function($query) use ($locationId){
+                $query->where('id', $locationId); }])->first();
         if(!$drone){
             return response()->json(['message'=>'Not found'],404);
         }
@@ -85,4 +88,20 @@ class DroneController extends Controller
         });
         return response()->json(['message'=>"Show current latitude and longitude successfully", 'data'=>$locations], 200);
     }
+
+    /**
+     * Find id drone and location for get current location latitude and longitude.
+     */
+    public function runDrone(string $droneId, Request $request)
+    {
+        $runDrone = Indruction::whereHas('drone', function ($query) use ($droneId) {
+            $query->where('drone_id', $droneId);})->first();
+        $runDrone->is_active  = $request->input('is_active');
+        $runDrone->save();
+
+        return response()->json(['message'=>"Failed to save instruction", 'data'=>$runDrone],500);
+
+     
+    }
+
 }

@@ -68,25 +68,27 @@ class MapController extends Controller
         $map->delete();
         return response()->json(['message'=>true, 'data'=>$map], 200);
     }
+
        /**
      * Find name map and farm id for download image
      */
     public function downloadMapPhoto(string $mapName, string $farmId )
     {
         $map = Map::where('name', $mapName)->with(['farm' => function($query) use ($farmId){
-            $query->orderByDesc('created_at')->where('id', $farmId); }])->first();
+            $query->where('id', $farmId); }])->first();
         if(!$map){
             return response()->json(['message'=>'Not found'],404);
         }
         return response()->json(['message'=>'Image download successfully', 'data'=>$map->image], 200);
     }
+
       /**
      * Find name map and farm id for delete image.
      */
     public function deleteMapPhoto(string $mapName, string $farmId )
     {
         $map = Map::where('name', $mapName)->with(['farm' => function($query) use ($farmId){
-            $query->orderByDesc('created_at')->where('id', $farmId); }])->first();
+            $query->where('id', $farmId); }])->first();
         if(!$map){
             return response()->json(['message'=>'Not found'],404);
         }
@@ -97,13 +99,14 @@ class MapController extends Controller
         $map->save();
         return response()->json(['message'=>'Image deleted successfully'], 200);
     }
+    
      /**
      * Find name map and farm id for add new image.
      */
     public function addMapPhoto(string $mapName, string $farmId, Request $request)
     {
         $map = Map::where('name', $mapName)->with(['farm' => function($query) use ($farmId){
-            $query->orderByDesc('created_at')->where('id', $farmId); }])->first();
+            $query->where('id', $farmId); }])->first();
         if (!$map) {
             return response()->json(['message' => 'Map not found'], 404);
         }

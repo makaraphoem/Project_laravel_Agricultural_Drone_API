@@ -27,11 +27,15 @@ class Plan extends Model
         return $plan;
     }
     public function user()
-
     {
         return $this->belongsTo(User::class);
     }
-    public function drones(){
+    public function drones()
+    {
         return $this->belongsToMany(Drone::class, 'drone_plans')->withTimestamps();
+    }
+    public function indructions()
+    {
+        return $this->hasMany(Indruction::class);
     }
 }

@@ -27,24 +27,27 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-// ___________________________________________________Route for log in create plan_______________
+// ___________________________________________________Route for log in create drone_______________
 Route::middleware(['auth:sanctum'])->group(function(){
-    Route::resource('/plans', PlanController::class);
+    Route::resource('/drones', DroneController::class);
     Route::post('/logOut', [ControllersLogInOutController::class, 'logout']);
 });
 Route::post('/logIn', [ControllersLogInOutController::class,'login']);
-// __________________________Route for user, farm, location, drone, map, indruction_______________
+// __________________________Route for user, farm, location, plan, map, indruction_______________
+Route::resource('/plans', PlanController::class);
 Route::resource('/users', UserController::class);
 Route::resource('/farms', FarmController::class);
 Route::resource('/locations',LocationController::class);
-Route::resource('/drones', DroneController::class);
 Route::resource('/maps', MapController::class);
 Route::resource('/indructions', IndructionController::class);
 
-Route::get('/drone/{id}/{locationId}',[DroneController::class, 'droneLocation']);
+Route::get('/drone/{droneId}/{locationId}',[DroneController::class, 'droneLocation']);
 Route::get('/map/{mapName}/{farmId}',[MapController::class, 'downloadMapPhoto']);
 Route::delete('/map/{mapName}/{farmId}',[MapController::class, 'deleteMapPhoto']);
 Route::put('/map/{mapName}/{farmId}',[MapController::class, 'addMapPhoto']);
+
+Route::get('/plan/{planName}',[PlanController::class, 'getIntroduction']);
+Route::put('/drone/{droneId}',[DroneController::class, 'runDrone']);
 
 
 

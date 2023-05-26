@@ -19,6 +19,9 @@ class ShowIndructionResource extends JsonResource
             'download_the_app'=>$this->download_the_app,
             'find_a_safe_location'=>$this->find_a_safe_location,
             'take_off_and_fly'=>$this->take_off_and_fly,
+            'drone'=> new DroneResource($this->drone),
+            'plans'=>new PlanResource($this->plan),
+
         ];
     }
 }

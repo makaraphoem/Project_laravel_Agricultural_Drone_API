@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('download_the_app');
             $table->string('find_a_safe_location');
             $table->string('take_off_and_fly');
+            $table->boolean('is_active')->default(false);
+            $table->unsignedBigInteger('drone_id')->unsigned();
+            $table->foreign('drone_id')->references('id')->on('drones')->onDelete('cascade');
+            $table->unsignedBigInteger('plan_id')->unsigned();
+            $table->foreign('plan_id')->references('id')->on('plans')->onDelete('cascade');
             $table->timestamps();
         });
     }
