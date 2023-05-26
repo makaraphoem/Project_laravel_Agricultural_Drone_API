@@ -56,8 +56,11 @@ class PlanController extends Controller
     public function update(PlanRequest $request, string $id)
     {
         $plan = Plan::find($id);
-        $plan = Plan::plan($request, $id);
-        return response()->json(['message'=>"Update plan successfully", 'data'=>$plan], 200);
+       if($plan){
+            $plan = Plan::plan($request, $id);
+            return response()->json(['Update plan successfully'=>true, 'data'=>$plan],200);
+       }
+       return response()->json(['message'=>"Plan id not found"],200);
     }
 
     /**

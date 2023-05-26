@@ -53,10 +53,12 @@ class DroneController extends Controller
      */
     public function update(DroneRequest $request, string $droneId)
     {
-        $drone = Drone::where('drone_id', $droneId)->get();
-        // dd($drone);
-        $drone = Drone::drone($request, $droneId);
-        return response()->json(['message'=>"Update drone by id successfully", 'data'=>$drone], 200);
+        $drone = Drone::find($droneId);
+       if($drone){
+            $drone = Drone::drone($request, $droneId);
+            return response()->json(['Update drone success'=>true, 'data'=>$drone],200);
+       }
+       return response()->json(['message'=>"Drone id not found"],200);
     }
     
     /**

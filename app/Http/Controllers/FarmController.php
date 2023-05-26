@@ -49,8 +49,12 @@ class FarmController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $farm = Farm::farm($request,$id);
-        return response()->json(['Update farm success'=>true, 'data'=>$farm],200);
+        $farm  = Farm::find($id);
+        if($farm ){
+            $farm  = Farm::farm ($request, $id);
+            return response()->json(['Update farm  success'=>true, 'data'=>$farm ],200);
+        }
+        return response()->json(['message'=>"Farm id not found"],200);
     }
     /**
      * Remove the specified resource from storage.

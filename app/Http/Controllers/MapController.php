@@ -52,8 +52,11 @@ class MapController extends Controller
     public function update(MapRerequest $request, string $id)
     {
         $map = Map::find($id);
-        $map = Map::map($request, $id);
-        return response()->json(['message'=>"Update map successfully", 'data'=>$map], 200);
+        if($map){
+            $map = Map::map($request, $id);
+            return response()->json(['Update map success'=>true, 'data'=>$map],200);
+        }
+       return response()->json(['message'=>"Map id not found"],200);
     }
 
     /**

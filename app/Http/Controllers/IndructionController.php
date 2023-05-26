@@ -47,8 +47,12 @@ class IndructionController extends Controller
      */
     public function update(IndructionRequest $request, string $id)
     {
-        $indruction = Instruction::indruction($request,$id);
-        return response()->json(['Update indruction success'=>true, 'data'=>$indruction],200);
+        $indruction = Instruction::find($id);
+       if($indruction){
+            $indruction = Instruction::indruction($request, $id);
+            return response()->json(['Update indruction success'=>true, 'data'=>$indruction],200);
+       }
+       return response()->json(['message'=>"Indruction id not found"],200);
     }
 
     /**

@@ -45,8 +45,12 @@ class LocationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $location = Location::location($request, $id);
-        return response()->json(['Update location success'=>true, 'data'=>$location],200);
+        $location = Location::find($id);
+       if($location){
+            $location = Location::location($request, $id);
+            return response()->json(['Update location success'=>true, 'data'=>$location],200);
+       }
+       return response()->json(['message'=>"Location id not found"],200);
     }
     /**
      * Remove the specified resource from storage.

@@ -29,8 +29,7 @@ class LocationRequest extends FormRequest
     public function rules(): array
     {
         return [
-<<<<<<< HEAD
-            'name' => [
+            'province' => [
                 'required',
                 Rule::unique('locations')->ignore($this->id),
             ],
@@ -42,11 +41,6 @@ class LocationRequest extends FormRequest
                 'required',
                 Rule::unique('locations')->ignore($this->id),
             ],
-=======
-            'province'=>'required',
-            'latitude'=>'required',
-            'longitude'=>'required',
->>>>>>> d18784f38fb64a5bdb7d91abad45093ad23496ec
             'drone_id'=>'required',
         ];
     }
