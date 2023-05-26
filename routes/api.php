@@ -8,6 +8,7 @@ use App\Http\Controllers\IndructionController;
 use App\Http\Controllers\LogInOutController as ControllersLogInOutController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\PostController;
 use App\Http\Resources\PlanResource;
 use App\Models\LogInOutController;
 use Illuminate\Http\Request;
@@ -45,6 +46,8 @@ Route::get('/drone/{id}/{locationId}',[DroneController::class, 'droneLocation'])
 Route::get('/map/{mapName}/{farmId}',[MapController::class, 'downloadMapPhoto']);
 Route::delete('/map/{mapName}/{farmId}',[MapController::class, 'deleteMapPhoto']);
 Route::put('/map/{mapName}/{farmId}',[MapController::class, 'addMapPhoto']);
+
+
 
 
 

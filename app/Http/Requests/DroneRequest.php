@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class DroneRequest extends FormRequest
 {
@@ -27,8 +28,17 @@ class DroneRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'drone_name' => 'required',
-            'drone_id' => 'required',
+           
+            'drone_id' => [
+                'required',
+                Rule::unique('drones')->ignore($this->id),
+            ],
+            'drone_name' => [
+                'required',
+                'min:3',
+                'max:20',
+                Rule::unique('drones')->ignore($this->id),
+            ],
             'drone_type' => 'required',
             'sensor' => 'required',
             'playoad_capacity' => 'required',

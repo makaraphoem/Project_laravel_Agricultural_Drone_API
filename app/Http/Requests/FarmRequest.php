@@ -31,9 +31,7 @@ class FarmRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                'min:8',
-                'max:15',
-                Rule::unique('users')->ignore($this->id),
+                Rule::unique('farms')->ignore($this->id),
             ],
             'size' => 'required',
         ];

@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class LocationRequest extends FormRequest
 {
@@ -28,9 +29,18 @@ class LocationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
-            'latitude'=>'required',
-            'longitude'=>'required',
+            'name' => [
+                'required',
+                Rule::unique('locations')->ignore($this->id),
+            ],
+            'latitude' => [
+                'required',
+                Rule::unique('locations')->ignore($this->id),
+            ],
+            'longitude' => [
+                'required',
+                Rule::unique('locations')->ignore($this->id),
+            ],
             'drone_id'=>'required',
         ];
     }

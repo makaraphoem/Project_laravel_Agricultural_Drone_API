@@ -29,15 +29,22 @@ class UserRequest extends FormRequest
         return [
             'name' => [
                 'required',
-                'min:5',
-                'max:15',
+                'min:8',
+                'max:20',
                 Rule::unique('users')->ignore($this->id),
             ],
             'email' => [
                 'required',
+                'min:12',
+                'max:15',
                 Rule::unique('users')->ignore($this->id),
             ],
-            'password' => 'required',
+            'password' => [
+                'required',
+                'min:6',
+                'max:20',
+                Rule::unique('users')->ignore($this->id),
+            ],
 
         ];
     }
