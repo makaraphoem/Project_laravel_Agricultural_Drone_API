@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class PlanRequest extends FormRequest
 {
@@ -27,7 +28,10 @@ class PlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
+            'name' => [
+                'required',
+                Rule::unique('plans')->ignore($this->id),
+            ],
             'spraying'=>'required',
             'seeding'=>'required',
             'start_date'=>'required',

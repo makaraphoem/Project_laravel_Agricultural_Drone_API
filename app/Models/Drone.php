@@ -19,10 +19,10 @@ class Drone extends Model
         'user_id',
     ];
 
-    public static function drone($request, $id=null)
+    public static function drone($request, $drone_id=null)
     {
         $drone = $request->only(['drone_id', 'drone_name', 'drone_type', 'sensor', 'playoad_capacity', 'batter_life','user_id']);
-        $drone = self::updateOrCreate(['id'=>$id], $drone);
+        $drone = self::updateOrCreate(['id'=>$drone_id], $drone);
         return $drone;
     }
     public function user()
