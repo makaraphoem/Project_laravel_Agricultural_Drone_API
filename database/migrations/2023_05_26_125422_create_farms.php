@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('size');
             $table->string('farming_type');
+            $table->unsignedBigInteger('map_id')->unsigned();
+            $table->foreign('map_id')->references('id')->on('maps')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

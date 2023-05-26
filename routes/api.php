@@ -42,12 +42,14 @@ Route::resource('/farms', FarmController::class);
 Route::resource('/locations',LocationController::class);
 Route::resource('/maps', MapController::class);
 Route::resource('/instructions', IndructionController::class);
-
+// Get location drone
 Route::get('/drone/{droneId}/{locationId}',[DroneController::class, 'droneLocation']);
+// Get update post and delete image from map
 Route::get('/map/{province}/{farmId}',[MapController::class, 'downloadMapPhoto']);
 Route::delete('/map/{province}/{farmId}',[MapController::class, 'deleteMapPhoto']);
-Route::put('/map/{province}/{farmId}',[MapController::class, 'addMapPhoto']);
-
+Route::post('/map/{province}/{farmId}',[MapController::class, 'addMapPhoto']);
+Route::put('/map/{province}/{farmId}',[MapController::class, 'updateMapPhoto']);
+// 
 Route::get('/plan/{planName}',[PlanController::class, 'getInstruction']);
 Route::put('/drone/{droneId}',[DroneController::class, 'runDrone']);
 

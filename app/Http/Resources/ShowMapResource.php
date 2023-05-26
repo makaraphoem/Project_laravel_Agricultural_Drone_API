@@ -19,7 +19,7 @@ class ShowMapResource extends JsonResource
             'name'=>$this->name,
             'image'=>$this->image,
             'drone'=> new DroneResource($this->drone),
-            'farm'=>new FarmResource($this->farm) 
+            'farm'=> FarmResource::collection($this->farms) 
         ];
     }
 }

@@ -50,15 +50,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
     
     public function drones(){
         return $this->hasMany(Drone::class);
     }
     public function plans()
-        {
-            return $this->hasMany(Plan::class);
-        } 
+    {
+        return $this->hasMany(Plan::class);
+    } 
     public function farms(): HasMany
     {
         return $this->hasMany(Farm::class);

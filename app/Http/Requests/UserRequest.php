@@ -35,24 +35,16 @@ class UserRequest extends FormRequest
             ],
             'email' => [
                 'required',
-                'min:12',
-                'max:15',
+                // 'min:10',
+                // 'max:15',
                 Rule::unique('users')->ignore($this->id),
             ],
             'password' => [
                 'required',
-                'min:6',
+                'min:8',
                 'max:20',
                 Rule::unique('users')->ignore($this->id),
             ],
-<<<<<<< HEAD
-=======
-            'password' =>[
-                'required',
-                Rule::unique('users')->ignore($this->id),
-            ] 
->>>>>>> d18784f38fb64a5bdb7d91abad45093ad23496ec
-
         ];
     }
 }

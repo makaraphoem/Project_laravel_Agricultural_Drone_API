@@ -74,8 +74,8 @@ class MapController extends Controller
      */
     public function downloadMapPhoto(string $province, string $farmId )
     {
-        $map = Map::where('province', $province)->with(['farm' => function($query) use ($farmId){
-            $query->where('id', $farmId); }])->first();
+        $map = Map::where('province', $province)->whereHas('farms', function ($query) use ($farmId) {
+            $query->where('id', $farmId);})->first();
         if(!$map){
             return response()->json(['message'=>'Not found'],404);
         }
@@ -87,8 +87,8 @@ class MapController extends Controller
      */
     public function deleteMapPhoto(string $province, string $farmId )
     {
-        $map = Map::where('province', $province)->with(['farm' => function($query) use ($farmId){
-            $query->where('id', $farmId); }])->first();
+        $map = Map::where('province', $province)->whereHas('farms', function ($query) use ($farmId) {
+                $query->where('id', $farmId);})->first();
         if(!$map){
             return response()->json(['message'=>'Map not found'],404);
         }
@@ -105,18 +105,32 @@ class MapController extends Controller
      */
     public function addMapPhoto(string $province, string $farmId, Request $request)
     {
-        $map = Map::where('province', $province)->with(['farm' => function($query) use ($farmId){
-            $query->where('id', $farmId); }])->first();
+        $map = Map::where('province', $province)->whereHas('farms', function ($query) use ($farmId) {
+            $query->where('id', $farmId);})->first();
         if (!$map) {
             return response()->json(['message' => 'Map not found'], 404);
         }
-        // $droneId = $map->drone_id;
-        // $map = new Map([
-        //     'name' => $mapName,
-        //     'image' => $request->input('image'),
-        //     'drone_id' =>  $droneId,
-        //     'farm_id' => $farmId,
-        // ]);
+        $droneId = $map->drone_id;
+        $map = new Map([
+            'province' => $province,
+            'image' => $request->input('image'),
+            'drone_id' =>  $droneId,
+            'farm_id' => $farmId,
+        ]);
+        $map->save();
+        return response()->json(['message'=>'Map added successfully', 'data'=>$map], 200);
+    }
+
+     /**
+     * Find name map and farm id for update image.
+     */
+    public function updateMapPhoto(string $province, string $farmId, Request $request)
+    {
+        $map = Map::where('province', $province)->whereHas('farms', function ($query) use ($farmId) {
+            $query->where('id', $farmId);})->first();
+        if (!$map) {
+            return response()->json(['message' => 'Map not found'], 404);
+        }
         $map->image = $request->input('image');
         $map->save();
         return response()->json(['message'=>'Map added successfully', 'data'=>$map], 200);

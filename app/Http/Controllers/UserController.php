@@ -26,6 +26,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+        // $data = $request->validated();
         $user = User::user($request);
         $token = $user->createToken('API Token')->plainTextToken;
         return response()->json(['Create user success'=>true, 'data'=>$user , 'token'=>$token],200);
@@ -38,11 +39,9 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if(!$user){
-
             return response()->json(['message'=>'Not found'],404);
         }
         $user = new ShowUserResource($user);
-        
         return response()->json(['scucces'=>true, 'data'=>$user],200);
     }
 
@@ -51,9 +50,12 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, string $id)
     {
-       $user = User::user($request,$id);
-       
-       return response()->json(['Update user success'=>true, 'data'=>$user],200);
+       $user = User::find($id);
+       if($user){
+            $user = User::user($request, $id);
+            return response()->json(['Update user success'=>true, 'data'=>$user],200);
+       }
+       return response()->json(['message'=>"User id not found"],200);
     }
 
     /**
@@ -68,6 +70,4 @@ class UserController extends Controller
         $user-> delete();
         return response()->json(['Delete user success'=>true, 'data'=>$user],201);
     }
-
-    
 }

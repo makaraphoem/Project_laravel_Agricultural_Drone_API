@@ -15,10 +15,11 @@ class Farm extends Model
         'size',
         'farming_type',
         'user_id',
+        'map_id'
     ];
 
     public static function farm($request, $id=null){
-        $farm = $request->only(['name','size', 'farming_type', 'user_id']);
+        $farm = $request->only(['name','size', 'farming_type', 'user_id', 'map_id']);
         $farm = self::updateOrCreate(['id' => $id], $farm);
         return $farm;  
     }
@@ -28,9 +29,9 @@ class Farm extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function maps()
+    public function map()
     {
-        return $this->hasMany(Map::class);
+        return $this->belongsTo(Map::class);
     }
 }
 

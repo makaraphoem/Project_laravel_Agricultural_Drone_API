@@ -102,5 +102,4 @@ class DroneController extends Controller
         $runDrone->save();
         return response()->json(['message'=>"Drone run successfully", 'data'=>$runDrone],500);
     }
-
 }
