@@ -58,7 +58,7 @@ class DroneController extends Controller
             $drone = Drone::drone($request, $droneId);
             return response()->json(['Update drone success'=>true, 'data'=>$drone],200);
        }
-       return response()->json(['message'=>"Drone id not found"],200);
+       return response()->json(['message'=>"Drone id not found"], 404);
     }
     
     /**
@@ -68,7 +68,7 @@ class DroneController extends Controller
     {
         $drone = Drone::find($id);
         if(!$drone){
-            return response()->json(['message'=>'Drone not found'],404);
+            return response()->json(['message'=>'Drone not found'], 404);
         }
         $drone->delete();
         return response()->json(['message'=>"Delete drone by id successfully", 'data'=>$drone], 200);
@@ -82,12 +82,13 @@ class DroneController extends Controller
         $drone = Drone::where('drone_id', $droneId)->with(['locations' => function($query) use ($locationId){
                 $query->where('id', $locationId); }])->first();
         if(!$drone){
-            return response()->json(['message'=>'Drone not found'],404);
+            return response()->json(['message'=>'Drone not found'], 404);
         }
         $locations = $drone->locations->map(function($location) {
             return [
-                'latitude' => $location->latitude,
-                'longitude' => $location->longitude,
+                'id'=>$location->id,
+                'latitude'=>$location->latitude,
+                'longitude'=>$location->longitude,
             ];
         });
         return response()->json(['message'=>"Show current latitude and longitude successfully", 'data'=>$locations], 200);
@@ -100,8 +101,11 @@ class DroneController extends Controller
     {
         $runDrone = Instruction::whereHas('drone', function ($query) use ($droneId) {
             $query->where('drone_id', $droneId);})->first();
+        if(!$runDrone){
+                return response()->json(['message'=>'Drone id not found'], 404);
+        }
         $runDrone->action  = $request->input('action');
         $runDrone->save();
-        return response()->json(['message'=>"Drone run successfully", 'data'=>$runDrone],500);
+        return response()->json(['message'=>"Drone run successfully", 'data'=>$runDrone], 200);
     }
 }

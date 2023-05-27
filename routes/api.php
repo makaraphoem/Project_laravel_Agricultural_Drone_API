@@ -5,6 +5,7 @@ use App\Http\Controllers\DroneController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\DroneTypeController;
 use App\Http\Controllers\IndructionController;
+use App\Http\Controllers\InstructionController;
 use App\Http\Controllers\LogInOutController as ControllersLogInOutController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\MkController;
@@ -41,7 +42,7 @@ Route::resource('/users', UserController::class);
 Route::resource('/farms', FarmController::class);
 Route::resource('/locations',LocationController::class);
 Route::resource('/maps', MapController::class);
-Route::resource('/instructions', IndructionController::class);
+Route::resource('/instructions', InstructionController::class);
 // Get location drone
 Route::get('/drone/{droneId}/{locationId}',[DroneController::class, 'droneLocation']);
 // Get update post and delete image from map

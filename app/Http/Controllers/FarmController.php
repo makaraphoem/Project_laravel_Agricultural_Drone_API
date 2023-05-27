@@ -38,10 +38,10 @@ class FarmController extends Controller
     {
         $farm = Farm::find($id);
         if(!$farm){
-            return response()->json(['message'=>'Not found'],404);
+            return response()->json(['message'=>'Farm id not found'], 404);
         }
         $farm = new ShowFarmResource($farm);
-        return response()->json(['scucces'=>true, 'data'=>$farm],200);
+        return response()->json(['scucces'=>true, 'data'=>$farm], 200);
     }
 
     /**
@@ -52,9 +52,9 @@ class FarmController extends Controller
         $farm  = Farm::find($id);
         if($farm ){
             $farm  = Farm::farm ($request, $id);
-            return response()->json(['Update farm  success'=>true, 'data'=>$farm ],200);
+            return response()->json(['Update farm  success'=>true, 'data'=>$farm ], 200);
         }
-        return response()->json(['message'=>"Farm id not found"],200);
+        return response()->json(['message'=>"Farm id not found"], 404);
     }
     /**
      * Remove the specified resource from storage.
@@ -63,9 +63,9 @@ class FarmController extends Controller
     {
         $farm = Farm::find($id);
         if(!$farm){
-            return response()->json(['message'=>'Not found'],404);
+            return response()->json(['message'=>'Farm id not found'], 404);
         }
         $farm-> delete();
-        return response()->json(['Delete fa$farm success'=>true, 'data'=>$farm],201);
+        return response()->json(['Delete farm successfully'=>true, 'data'=>$farm], 201);
     }
 }

@@ -22,7 +22,7 @@ class ShowPlanResource extends JsonResource
             'start_date'=>$this->start_date,
             'end_date'=>$this->end_date,
             'area'=>$this->area,
-            'indructions'=>IndructionResource::collection($this->indructions),
+            'instructions'=>InstructionResource::collection($this->instructions),
             'drone'=>DroneResource::collection($this->drones),
             'farmer'=> new UserResource($this->user), 
         ];

@@ -39,7 +39,7 @@ class MapController extends Controller
     {
         $map = Map::find($id);
         if(!$map){
-            return response()->json(['message'=>'Map not found'],404);
+            return response()->json(['message'=>'Map id not found'],404);
         }
         $map = new ShowMapResource($map);
         return response()->json(['message'=>"Get map by id successfully", 'data'=>$map], 200);
@@ -56,7 +56,7 @@ class MapController extends Controller
             $map = Map::map($request, $id);
             return response()->json(['Update map success'=>true, 'data'=>$map],200);
         }
-       return response()->json(['message'=>"Map id not found"],200);
+       return response()->json(['message'=>"Map id not found"], 404);
     }
 
     /**
@@ -66,7 +66,7 @@ class MapController extends Controller
     {
         $map = Map::find($id);
         if(!$map){
-            return response()->json(['message'=>'Map not found'],404);
+            return response()->json(['message'=>'Map id not found'], 404);
         }
         $map->delete();
         return response()->json(['message'=>"Delete map successfully", 'data'=>$map], 200);
@@ -80,7 +80,7 @@ class MapController extends Controller
         $map = Map::where('province', $province)->whereHas('farms', function ($query) use ($farmId) {
             $query->where('id', $farmId);})->first();
         if(!$map){
-            return response()->json(['message'=>'Not found'],404);
+            return response()->json(['message'=>'Province id not found'], 404);
         }
         return response()->json(['message'=>'Image download successfully', 'data'=>$map->image], 200);
     }
@@ -93,7 +93,7 @@ class MapController extends Controller
         $map = Map::where('province', $province)->whereHas('farms', function ($query) use ($farmId) {
                 $query->where('id', $farmId);})->first();
         if(!$map){
-            return response()->json(['message'=>'Map not found'],404);
+            return response()->json(['message'=>'Map id not found'], 404);
         }
         if (!$map->image) {
             return response()->json(['message' => 'Map image not found'], 404);
@@ -111,7 +111,7 @@ class MapController extends Controller
         $map = Map::where('province', $province)->whereHas('farms', function ($query) use ($farmId) {
             $query->where('id', $farmId);})->first();
         if (!$map) {
-            return response()->json(['message' => 'Map not found'], 404);
+            return response()->json(['message' => 'Map id not found'], 404);
         }
         $droneId = $map->drone_id;
         $map = new Map([
@@ -132,7 +132,7 @@ class MapController extends Controller
         $map = Map::where('province', $province)->whereHas('farms', function ($query) use ($farmId) {
             $query->where('id', $farmId);})->first();
         if (!$map) {
-            return response()->json(['message' => 'Map not found'], 404);
+            return response()->json(['message' => 'Map id not found'], 404);
         }
         $map->image = $request->input('image');
         $map->save();

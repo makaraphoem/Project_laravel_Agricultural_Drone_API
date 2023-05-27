@@ -26,7 +26,7 @@ class ShowDroneResource extends JsonResource
             'playoad_capacity'=>$this->playoad_capacity,
             'batter_life'=>$this->batter_life,
             'famer'=> new UserResource($this->user),
-            'indructions'=>IndructionResource::collection($this->indructions),
+            'instructions'=>InstructionResource::collection($this->instructions),
             'plans'=> PlanResource::collection($this->plans),
             'maps'=> MapResource::collection($this->maps),
             'locations'=>  LocationResource::collection($this->locations),

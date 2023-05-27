@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $user = User::all();
         $user =  ShowUserResource::collection($user);
-        return response()->json(['Get all user success'=>true, 'data'=>$user],200);
+        return response()->json(['Get all user success'=>true, 'data'=>$user], 200);
     }
 
     /**
@@ -39,10 +39,10 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if(!$user){
-            return response()->json(['message'=>'Not found'],404);
+            return response()->json(['message'=>'User id not found'], 404);
         }
         $user = new ShowUserResource($user);
-        return response()->json(['scucces'=>true, 'data'=>$user],200);
+        return response()->json(['scucces'=>true, 'data'=>$user], 200);
     }
 
     /**
@@ -53,9 +53,9 @@ class UserController extends Controller
        $user = User::find($id);
        if($user){
             $user = User::user($request, $id);
-            return response()->json(['Update user success'=>true, 'data'=>$user],200);
+            return response()->json(['Update user success'=>true, 'data'=>$user], 200);
        }
-       return response()->json(['message'=>"User id not found"],200);
+       return response()->json(['message'=>"User id not found"], 404);
     }
 
     /**
@@ -65,9 +65,9 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if(!$user){
-            return response()->json(['message'=>'Not found'],404);
+            return response()->json(['message'=>'User id not found'], 404);
         }
         $user-> delete();
-        return response()->json(['Delete user success'=>true, 'data'=>$user],201);
+        return response()->json(['Delete user success'=>true, 'data'=>$user], 200);
     }
 }
