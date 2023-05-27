@@ -36,13 +36,13 @@ class DroneController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $drone_id)
+    public function show(string $id)
     {
-        $drone = Drone::where('drone_id', $drone_id)->get();
+        $drone = Drone::where('drone_id', $id)->first();
         if(!$drone){
             return response()->json(['message'=>'Drone not found'],404);
         }
-        $drone =  DroneResource::collection($drone);
+        $drone = new DroneResource($drone);
         return response()->json(['message'=>"Get drone by id successfully", 'data'=>$drone], 200);
     }
     
