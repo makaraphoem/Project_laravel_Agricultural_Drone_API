@@ -15,6 +15,7 @@ class ShowInstructionResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id'=>$this->id,
             'charge_the_batterie'=>$this->charge_the_batterie,
             'download_the_app'=>$this->download_the_app,
             'find_a_safe_location'=>$this->find_a_safe_location,

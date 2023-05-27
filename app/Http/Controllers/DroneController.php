@@ -7,7 +7,6 @@ use App\Http\Resources\DroneResource;
 use App\Http\Resources\IndructionResource;
 use App\Http\Resources\ShowDroneResource;
 use App\Models\Drone;
-use App\Models\Indruction;
 use App\Models\Instruction;
 use App\Models\Location;
 use Illuminate\Contracts\Database\Eloquent\Builder;

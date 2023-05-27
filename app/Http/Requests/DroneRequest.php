@@ -28,11 +28,7 @@ class DroneRequest extends FormRequest
     public function rules(): array
     {
         return [
-           
-            'drone_id' => [
-                'required',
-                Rule::unique('drones')->ignore($this->id),
-            ],
+            'drone_id' => 'required',
             'drone_name' => [
                 'required',
                 'min:3',
