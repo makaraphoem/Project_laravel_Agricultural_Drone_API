@@ -79,12 +79,11 @@ class PlanController extends Controller
      */
     public function getInstruction(string $planName)
     {
-        $planInstruction = Instruction::whereHas('plan', function ($query) use ($planName) {
-            $query->where('plan_name', $planName);})->first();
-        if(!$planInstruction){
-            return response()->json(['message'=>'Instruction in plan not found'], 404);
+        $getPlan = Plan::where('plan_name', $planName)->first();
+        if(!$getPlan){
+            return response()->json(['message'=>'Plan id not found'], 404);
         }
-        $planInstruction = new InstructionResource($planInstruction);
-        return response()->json(['message'=>"Show plan intruction successfully", 'data'=>$planInstruction], 200);
+        $getPlan = new ShowPlanResource($getPlan);
+        return response()->json(['message'=>"Show plan intruction successfully", 'data'=>$getPlan], 200);
     }
 }

@@ -16,7 +16,7 @@ class ShowMapResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'name'=>$this->name,
+            'province'=>$this->province,
             'image'=>$this->image,
             'drone'=> new DroneResource($this->drone),
             'farm'=> FarmResource::collection($this->farms) 

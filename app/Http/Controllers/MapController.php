@@ -138,4 +138,5 @@ class MapController extends Controller
         $map->save();
         return response()->json(['message'=>'Map added successfully', 'data'=>$map], 200);
     }
+    
 }
